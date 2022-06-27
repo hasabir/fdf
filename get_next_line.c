@@ -6,14 +6,14 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 11:40:18 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/12 13:24:29 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/27 16:38:46 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #define BUFFER_SIZE 1
 
-char	*ft_strchr(char *s, int c)
+char	*my_strchr(char *s, int c)
 {
 	unsigned char	*ss;
 	unsigned int	i;
@@ -110,6 +110,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	buf = ft_read_line(stock);
-	stock = ft_strchr(stock, '\n');
+	stock = my_strchr(stock, '\n');
 	return (buf);
 }

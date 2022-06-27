@@ -6,162 +6,106 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:52:35 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/22 12:39:54 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/27 19:39:42 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// int dda(int x1, int y1, int x2, int y2 , t_data *data)
-// {
-	
-// }
-
-int draw_line(int x1, int y1, int x2, int y2, t_data *data, t_map *map)
-{
-	x1 *= data->zoom;
-	x2 *= data->zoom;
-	y2 *= data->zoom;
-	y1 *= data->zoom;
-	
-	int e = abs(x2 -x1);
-	int dx = 2 * e;
-	int dy = 2 *abs(y2 - y1);
-	
-	
-	if (x1 <= x2 && y1 <= y2)
-	{
-		while (x1 <= x2 && y1 <= y2)
-		{
-			my_mlx_pixel_put(data, x1, y1, RED);
-			x1++;
-			e -= dy;
-			if (e < 0)
-			{
-				y1++;
-				e+= dx;
-			}
-		}
-		
-	}
-	else if (x1 >= x2 && y1 <= y2)
-	{
-		while (x1 >= x2 || y1 <= y2)
-		{
-			my_mlx_pixel_put(data, x1, y1, BLUE);
-			x1--;
-			e -= dy;
-			if (e < 0)
-			{
-				y1++;
-				e+= dx;
-			}
-		}
-	}
-	else if (x1 >= x2 && y1 >= y2)
-	{
-		while (x1 >= x2 || y1 >= y2)
-		{
-			my_mlx_pixel_put(data, x1, y1, RED);
-			x1--;
-			e -= dy;
-			if (e < 0)
-			{
-				y1--;
-				e+= dx;
-			}
-		}
-	}
-	else if(x1 <= x2 && y1 >= y2)
-	{
-		while (x1 <= x2 || y1 >= y2)
-		{
-			my_mlx_pixel_put(data, x1, y1, GREEN);
-			x1++;
-			e -= dy;
-			if (e < 0)
-			{
-				y1--;
-				e+= dx;
-			}
-		}
-	}
-	return(0);
-}
-
-int towD_to_iso(int *x, int *y)
+void towD_to_iso(int *x, int *y)
 {
 	int isox;
 	int isoy;
 
-	isox = *x * cos(0.8) - *y * cos(0.8);
-	isoy = *x * sin(0.8) + *y * sin(0.8);
+	isox = *x * cos(0.6) - *y * sin(0.6)+ 30;
+	isoy = *x * sin(0.6) + *y * cos(0.6)+ 30;
 	*x = isox;
 	*y = isoy;
-	return (0);
+	return;
 }
 
-int draw_line2(int x1, int y1, int x2, int y2, t_data *data, t_map *map)
+void creat_coordinate(t_data_coordinate	*coordinate, t_data *data)
+{
+	data->zoom = 20;// zoom function	
+	coordinate->x1 *= data->zoom;
+	coordinate->x2 *= data->zoom;
+	coordinate->y1 *= data->zoom;
+	coordinate->y2 *= data->zoom;
+	towD_to_iso(&coordinate->x1, &coordinate->y1);
+	towD_to_iso(&coordinate->x2, &coordinate->y2);
+	coordinate->ex = abs(coordinate->x2 - coordinate->x1);
+	coordinate->ey = abs(coordinate->y2 - coordinate->y1);
+	coordinate->dx = 2 * coordinate->ex;
+	coordinate->dy = 2 * coordinate->ey;
+	coordinate->px = coordinate->ex;
+	coordinate->py = coordinate->ey;
+}
+
+void first_case(t_data_coordinate *coordinate, t_data *data, int xi, int yi)
+{
+	int i;
+
+	i = 0;
+	while (i <= coordinate->px)
+	{
+		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, GREEN);
+		i++;
+		coordinate->x1 += xi;
+		coordinate->ex -= coordinate->dy;
+		if (coordinate->ex <= 0)
+		{
+			coordinate->y1+= yi;
+			coordinate->ex+= coordinate->dx;
+		}
+	}
+	return ;	
+}
+
+void second_case(t_data_coordinate *coordinate, t_data *data, int xi, int yi)
+{
+	int	i;
+
+	i = 0;
+	while (i <= coordinate->py)
+	{
+		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, GREEN);
+		i++;
+		coordinate->y1+= yi;
+		coordinate->ey -= coordinate->dx;
+		if (coordinate->ey <= 0)
+		{
+			coordinate->x1+= xi;
+			coordinate->ey+= coordinate->dy;
+		}
+	}
+	return ;
+}
+
+void third_case(t_data_coordinate *coordinate, t_data *data, int xi, int yi)
+{
+	while (coordinate->x1 <= coordinate->x2 || coordinate->y1 <= coordinate->y2)
+	{
+		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, GREEN);
+		coordinate->x1++;
+		coordinate->y1++;
+	}
+}
+int draw_line3(t_data_coordinate *coordinate, t_data *data, t_map *map)
 {	
-	x1 *= data->zoom;
-	x2 *= data->zoom;
-	y2 *= data->zoom;
-	y1 *= data->zoom;
-	
-	towD_to_iso(&x1, &y1);
-	towD_to_iso(&x2, &y2);
-	int ex = abs(x2 - x1);
-	int ey = abs(y2 - y1);
-	int dx = 2 * ex;
-	int dy = 2 * ey;
 	int i = 0;
 	int xi = 1;
 	int yi = 1;
-	int px = ex;
-	int py = ey;
-
-	if (x1 > x2)
+	
+	creat_coordinate(coordinate, data);
+	if (coordinate->x1 > coordinate->x2)
 		xi = -1;
-	if (y1 > y2)
+	if (coordinate->y1 > coordinate->y2)
 		yi = -1;
-	if (px > py)
-	{
-		while (i <= px)
-		{
-			my_mlx_pixel_put(data, x1, y1, GREEN);
-			i++;
-			x1 += xi;
-			ex -= ey;
-			if (ex <= 0)
-			{
-				y1+= yi;
-				ex+= dx;
-			}
-		}	
-	}
-	else if (px <= py)
-	{
-		while (i <= py)
-		{
-			my_mlx_pixel_put(data, x1, y1, map->color);
-			i++;
-			y1+= yi;
-			ey -= ex;
-			if (ey <= 0)
-			{
-				x1+= xi;
-				ey+= dy;
-			}
-		}
-		
-	}
-	// else if(px == py)
-	// {
-	// 	while (x1 < x2)
-	// 	{
-	// 		my_mlx_pixel_put(data, x1, y1, BLUE);
-	// 		x1++;
-	// 	}
-	// }
+	if (coordinate->px > coordinate->py)
+		first_case(coordinate, data, xi, yi);
+	else if (coordinate->px < coordinate->py)
+		second_case(coordinate, data, xi, yi);
+	else if (coordinate->px == coordinate->py)
+		third_case(coordinate, data, xi, yi);
 	return 0;
 }

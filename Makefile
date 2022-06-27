@@ -6,7 +6,7 @@
 #    By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:26:10 by hasabir           #+#    #+#              #
-#    Updated: 2022/06/21 16:35:43 by hasabir          ###   ########.fr        #
+#    Updated: 2022/06/27 17:17:35 by hasabir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ NAME = fdf
 
 # PATH = get_next_line
 
-SRCS = main.c fdf_utils.c map_draw.c get_next_line.c get_next_line_utils.c\
-	split.c test.c display.c draw_line.c mlx_utils.c display_map.c
-	
+SRCS = main.c fdf_utils.c draw_map.c get_next_line.c get_next_line_utils.c\
+	split.c draw_line.c mlx_utils.c display_map.c ft_atoi_base.c\
+		
 OBJ_D = obj
 
 OBJS = $(addprefix $(OBJ_D)/,${SRCS:.c=.o}) 
