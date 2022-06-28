@@ -6,12 +6,27 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 15:53:35 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/27 19:27:46 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/28 15:51:30 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// int loop_hook(t_data *img, t_map *map)
+// {
+// 	mlx_mouse_hook(img->mlx_win, mouse_hook, img);
+// 	int x1 = img->x;
+// 	int y1 = img->y;
+	
+// 	int x2 = 900;
+// 	int y2 = 800;
+// 	draw_line(x1, y1, x2, y2, img,map);
+// 	// dda_line_draw(100, 200, 500, 300, img, map);
+// 	// dda_line_draw(x1, x2, y1, y2, img, map);
+// 	// mlx_put_image_to_window(img->mlx_ptr, img->mlx_win, img->img, 0, 0);
+	
+// 	return 0;
+// }
 void putmap(t_map *map)
 {
 	int i;
@@ -53,53 +68,6 @@ void putmap(t_map *map)
 // 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img, 0, 0);
 // 	return ;
 // }
-
-void dda_line_draw(int x0, int y0, int x1, int y1, t_data *data, t_map *map)
-{
-	float x;
-	float y;
-	float dx;
-	float dy;
-	float steps;
-	
-	dx = (float)(x1 - x0);
-	dy = (float)(y1 - y0);
-	if(dx >= dy)
-		steps = dx;
-	else
-		steps = dy;
-	dx = dx/steps;
-	dy = dy/steps;
-	x = x0;
-	y = y0;
-	int i = 1;
-	while(i <= steps)
-	{
-		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x,y, RED);
-		x+=dx;
-		y+=dy;
-		i++;
-	}
-	return;
-}
-
-// int loop_hook(t_data *img, t_map *map)
-// {
-// 	mlx_mouse_hook(img->mlx_win, mouse_hook, img);
-// 	int x1 = img->x;
-// 	int y1 = img->y;
-	
-// 	int x2 = 900;
-// 	int y2 = 800;
-// 	draw_line(x1, y1, x2, y2, img,map);
-// 	// dda_line_draw(100, 200, 500, 300, img, map);
-// 	// dda_line_draw(x1, x2, y1, y2, img, map);
-// 	// mlx_put_image_to_window(img->mlx_ptr, img->mlx_win, img->img, 0, 0);
-	
-// 	return 0;
-// }
-
-
 
 int main(int ac, char **av)
 {

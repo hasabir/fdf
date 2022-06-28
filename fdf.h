@@ -6,17 +6,23 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 12:11:42 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/27 19:29:21 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/28 15:48:07 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include "get_next_line.h"
 #include <limits.h>
 #include <mlx.h>
 #include <math.h> 
+
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 #define WINDOW_WIDTH 1000
 #define	WINDOW_HEIGHT 1000
@@ -47,10 +53,9 @@ typedef struct s_data_coordinate
 	int ey;
 	int dx;
 	int dy;
-	// int p1;
-	// int p2;
 	int px;
 	int py;
+	int	zoom;
 }t_data_coordinate ;
 
 typedef struct	s_data {
@@ -61,13 +66,21 @@ typedef struct	s_data {
 	int		endian;
 	int 	x;
 	int 	y;
-	int		zoom;
 	void	*mlx_ptr;
 	void	*mlx_win;
-	int	color;
+	int		color;
+	t_map	*map;
 }	t_data;
 
-// typedef struct s_map	t_map; 
+// typedef struct s_map	t_map;
+
+char	*get_next_line(int fd);
+int		ft_strlen(const char *str);
+int		ft_strlcpy(char *dst, const char *src, int dstsize);
+char	*ft_strdup(const char *s1);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substr(char const *s, int start, int len);
+
 int		ft_atoi(const char *str);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int		get_ordinate(char *av);
@@ -90,9 +103,11 @@ int		loop_hook(t_data *data, t_map *map);
 int		display_map1(t_data *data, t_map *map);
 int		display_map(t_data *data, t_map *map);
 void 	putmap(t_map *map);
-int	ft_strnstr(const char *s1, const char *s2, int len);
+int		ft_strnstr(const char *s1, const char *s2, int len);
 char	*ft_strchr(const char *s, int c);
-int	ft_atoi_base(char	*str, char	*base);
+int		ft_atoi_base(char	*str, char	*base);
+int		ft_strcmp(char *s1, char *s2);
+int		set_colors(t_map *map, int coordinate, char *arg, int n);
 
 
 

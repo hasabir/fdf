@@ -6,12 +6,34 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 13:30:00 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/27 16:43:52 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/28 15:43:10 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #define L_MAX 9223372036854775807
+
+int	set_colors(t_map *map, int coordinate, char *arg, int n)
+{
+	if (n == 0)
+	{
+		if (coordinate == 0)
+			return(16777215);
+		else
+			return (65280);
+	}
+	return (ft_atoi_base(arg, "0123456789ABCDEF"));
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -76,7 +98,7 @@ void    *ft_calloc(size_t count, size_t size)
 
         p = malloc(count * size);
         if (!p)
-                return (0);
+            return (0);
         ft_bzero (p, count * size);
         return (p);
 }

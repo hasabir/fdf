@@ -6,11 +6,13 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 11:40:18 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/27 16:38:46 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/28 15:39:27 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+// #include "get_next_line.h"
+#include "fdf.h"
+
 #define BUFFER_SIZE 1
 
 char	*my_strchr(char *s, int c)

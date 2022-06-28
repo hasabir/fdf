@@ -6,11 +6,11 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:56:17 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/27 16:07:37 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/28 15:40:28 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "fdf.h"
 
 int	ft_strlen(const char *str)
 {

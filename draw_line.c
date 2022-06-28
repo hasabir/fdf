@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:52:35 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/27 19:39:42 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/28 15:46:33 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void towD_to_iso(int *x, int *y)
 
 void creat_coordinate(t_data_coordinate	*coordinate, t_data *data)
 {
-	data->zoom = 20;// zoom function	
-	coordinate->x1 *= data->zoom;
-	coordinate->x2 *= data->zoom;
-	coordinate->y1 *= data->zoom;
-	coordinate->y2 *= data->zoom;
+	coordinate->zoom = 20;// zoom function	
+	coordinate->x1 *= coordinate->zoom;
+	coordinate->x2 *= coordinate->zoom;
+	coordinate->y1 *= coordinate->zoom;
+	coordinate->y2 *= coordinate->zoom;
 	towD_to_iso(&coordinate->x1, &coordinate->y1);
 	towD_to_iso(&coordinate->x2, &coordinate->y2);
 	coordinate->ex = abs(coordinate->x2 - coordinate->x1);
@@ -39,6 +39,7 @@ void creat_coordinate(t_data_coordinate	*coordinate, t_data *data)
 	coordinate->dy = 2 * coordinate->ey;
 	coordinate->px = coordinate->ex;
 	coordinate->py = coordinate->ey;
+	return ;
 }
 
 void first_case(t_data_coordinate *coordinate, t_data *data, int xi, int yi)
@@ -48,7 +49,7 @@ void first_case(t_data_coordinate *coordinate, t_data *data, int xi, int yi)
 	i = 0;
 	while (i <= coordinate->px)
 	{
-		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, GREEN);
+		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, data->color);
 		i++;
 		coordinate->x1 += xi;
 		coordinate->ex -= coordinate->dy;
@@ -68,7 +69,7 @@ void second_case(t_data_coordinate *coordinate, t_data *data, int xi, int yi)
 	i = 0;
 	while (i <= coordinate->py)
 	{
-		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, GREEN);
+		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, data->color);
 		i++;
 		coordinate->y1+= yi;
 		coordinate->ey -= coordinate->dx;
@@ -85,7 +86,7 @@ void third_case(t_data_coordinate *coordinate, t_data *data, int xi, int yi)
 {
 	while (coordinate->x1 <= coordinate->x2 || coordinate->y1 <= coordinate->y2)
 	{
-		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, GREEN);
+		my_mlx_pixel_put(data, coordinate->x1, coordinate->y1, data->color);
 		coordinate->x1++;
 		coordinate->y1++;
 	}

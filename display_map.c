@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 11:21:07 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/27 19:53:44 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/06/28 15:29:38 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	display_map(t_data *data, t_map *map)
 		while (x < map->size_x + 10)
 		{
 			
-					// data->color = map->color[y][i];
-					// printf("data->color = %d\n",data->color);
+			data->color = map->color[y][i];
 			if  (x < map->size_x + 10 - 1)
 				{
 					coordinate->x1 = x;
