@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:54:29 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/27 17:24:46 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/07/03 22:01:27 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,6 @@ int	ft_is_base(char	*str)
 
 static char	*my_atoi(char	*str)
 {
-	// while (str[i])
-	// {
-	// 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-	// 		i++;
-	// 	while (str[i] == '+' || str[i] == '-')
-	// 		i++;
-	// 	if (str[i] != '+' && str[i] != '-')
-	// 		break ;
-	// }
 	if (str[0] != '0' && str[1] != 'x')
 		ft_perror();
 	return (str + 2);

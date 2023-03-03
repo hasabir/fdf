@@ -6,25 +6,26 @@
 #    By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:26:10 by hasabir           #+#    #+#              #
-#    Updated: 2022/06/27 17:17:35 by hasabir          ###   ########.fr        #
+#    Updated: 2022/07/07 10:30:54 by hasabir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# OBJS = $(addprefix $(OBJ_D)/,main.o check_errors.o pipex_utils.o split.o pipex_utils_2.o pipex_utils_3.o)
-# OBJ = obj
-# OBJS = obj/main.o obj/check_errors.o obj/pipex_utils.o obj/split.o obj/pipex_utils_2.o obj/pipex_utils_3.o
-
 NAME = fdf
-
-# PATH = get_next_line
+BONUS = fdf_bonus
 
 SRCS = main.c fdf_utils.c draw_map.c get_next_line.c get_next_line_utils.c\
 	split.c draw_line.c mlx_utils.c display_map.c ft_atoi_base.c\
+	fdf_utils_2.c fdf_utils_3.c
+
+SRCS_BONUS = main_bonus.c fdf_utils.c draw_map.c get_next_line.c get_next_line_utils.c\
+	split.c draw_line.c mlx_util_bonus.c display_map_bonus.c ft_atoi_base.c\
+	fdf_utils_2.c fdf_utils_3.c
 		
 OBJ_D = obj
+OBJ_B = obj_bonus
 
-OBJS = $(addprefix $(OBJ_D)/,${SRCS:.c=.o}) 
-# OBJS = ${SRCS:.c=.o}
+OBJS = $(addprefix $(OBJ_D)/,${SRCS:.c=.o})
+OBJS_BONUS = $(addprefix $(OBJ_B)/,${SRCS_BONUS:.c=.o})
 
 CC = gcc
 
@@ -34,19 +35,31 @@ all : ${NAME}
 
 $(OBJ_D)/%.o: %.c | ${OBJ_D}
 	@$(CC) $(CFLAGS) -c -o $@ $<
-# %.o: %.c 	# @$(CC) -c -o $@ $<
 
 ${NAME} :${OBJS}
-	@$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 ${OBJ_D} :
 	@mkdir ${OBJ_D}
-#	@mkdir ${PATH}/${OBJ_D}
+
+bonus : ${BONUS}
+
+$(OBJ_B)/%.o: %.c | ${OBJ_B}
+	@$(CC) $(CFLAGS) -c -o $@ $<
+
+${BONUS} :${OBJS_BONUS}
+	@$(CC) $(OBJS_BONUS) -lmlx -framework OpenGL -framework AppKit -o $(BONUS)
+
+${OBJ_B} :
+	@mkdir ${OBJ_B}
+
 
 clean:
 	@rm -rf ${OBJ_D} 
+	@rm -rf ${OBJ_B} 
 
 fclean: clean
 	@rm -rf ${NAME}
+	@rm -rf ${BONUS}
 
-re: fclean all
+re: fclean all bonus

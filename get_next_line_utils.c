@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:56:17 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/28 15:40:28 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/07/03 22:02:04 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	ft_strlen(const char *str)
 {
 	int	i;
-	
+
 	if (!str)
-		return(-1);
+		return (-1);
 	i = 0;
 	while (str[i])
 		i++;

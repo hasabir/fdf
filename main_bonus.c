@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/12 15:53:35 by hasabir           #+#    #+#             */
-/*   Updated: 2022/07/07 10:21:22 by hasabir          ###   ########.fr       */
+/*   Created: 2022/07/07 10:17:29 by hasabir           #+#    #+#             */
+/*   Updated: 2022/07/07 10:33:01 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	loop_hook(t_data *data, t_map *map)
 {
 	mlx_hook(data->mlx_win, 2, 0, key_hook, data);
+	mlx_mouse_hook(data-> mlx_win, mouse_hook, data);
 	mlx_hook(data->mlx_win, 17, 0, distroy_window_x, data);
 	return (0);
 }
@@ -33,7 +34,7 @@ int	set_window_size(t_data *data, int i)
 	}
 	else
 	{
-		y = (data->map->size_y * data->map->zoom) * 3;
+		y = (data->map->size_y * data->map->zoom) * 2;
 		return (y);
 	}
 	return (0);
@@ -72,7 +73,7 @@ void	set_default(t_data *data)
 	if (data->map->size_x == data->map->size_y)
 		data->mv_x = data->map->size_y + (data->map->size_y / 10);
 	else
-		data->mv_x = data->map->size_x + 10;
+		data->mv_x = data->map->size_y;
 	i = data->map->zoom;
 	data->z_axis = i;
 	display_map(data);

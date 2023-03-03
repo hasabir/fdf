@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 08:56:29 by hasabir           #+#    #+#             */
-/*   Updated: 2022/06/13 18:04:15 by hasabir          ###   ########.fr       */
+/*   Updated: 2022/07/06 18:42:36 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**fill(char *s, char c, char **p, int h)
 			h++;
 		if (s[h] != c)
 		{
-			ft_alloc(s + h, c, p, i);
+			p[i] = ft_alloc(s + h, c, p, i);
 			if (!p)
 				return (0);
 		}	

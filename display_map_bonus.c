@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_map.c                                      :+:      :+:    :+:   */
+/*   display_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 11:21:07 by hasabir           #+#    #+#             */
-/*   Updated: 2022/07/07 10:16:35 by hasabir          ###   ########.fr       */
+/*   Created: 2022/07/07 10:15:47 by hasabir           #+#    #+#             */
+/*   Updated: 2022/07/07 10:32:54 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ void	draw_background(t_data *data)
 		y++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img, 0, 0);
+	return ;
+}
+
+void	put_info(t_data *data)
+{
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 2, 5, 0xFFFFFF,
+		"zoom z axis     : + -");
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 2, 25, 0xFFFFFF,
+		"Plat            : p\n");
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 2, 45, 0xFFFFFF,
+		"isometric       : i\n");
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 2, 65, 0xFFFFFF,
+		"other projection: o\n");
 	return ;
 }
 
@@ -81,5 +94,7 @@ int	display_map(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img, data->x, data->y);
+	if (data->map->size_x > 10 || data->map->size_y > 10)
+		put_info(data);
 	return (0);
 }
